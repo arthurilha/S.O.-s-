@@ -212,20 +212,92 @@ public class Softwares {
     };
 
     public static Word[] E3 = new Word[]{
-        new Word(Opcode.LDI, 5, -1, 5),       // r1 <- 50
-        new Word(Opcode.STD, 5, -1, 8),      // A <- r0
-
-        new Word(Opcode.LDI, 5, -1, 10),      // r1 <- 50
-        new Word(Opcode.STD, 5, -1, 9),       // B <- r0
-
-        new Word(Opcode. LDD, 1, -1, 8),     // r1 <- A
-        new Word(Opcode. LDD, 2, -1, 9),     // r2 <- B
-        new Word(Opcode. MULT, 1, 2, -1),      // r1 <- r1 * r2
-
-        new Word( Opcode.STOP, -1, -1, -1),
-
-        new Word( Opcode.DATA, -1, -1, 5),   // A  5
-        new Word( Opcode.DATA, -1, -1, 10),   // B 10
+        new Word(Opcode.LDI, 8, -1,  1),      //0    Input
+        new Word(Opcode.TRAP,-1, -1,-1),      //1    Input
+        new Word(Opcode.STD, 1, -1, 11),      //2    A  
+        new Word(Opcode.LDI, 8, -1, 1 ),      //0    input
+        new Word(Opcode.TRAP,-1, -1,-1),      //1    input
+        new Word(Opcode.STD, 1, -1, 12),      //2    B   
+        new Word(Opcode.LDD, 1, -1, 11),      //3    r1 <- A
+        new Word(Opcode.LDD, 2, -1, 12),      //4    r2  <- B
+        new Word(Opcode.MULT, 1, 2, -1),      //5    r1  <- r1 * r2
+        new Word(Opcode.STD, 1, -1, 13),      //6    result
+        new Word(Opcode.LDI, 8, -1,  2),      //7   Output
+        new Word(Opcode.LDD, 9, -1, 13),      //8   r9 <- A
+        new Word(Opcode.TRAP,-1, -1,-1),      //9   Output
+        new Word(Opcode.STOP,-1, -1,-1),      //10
+        new Word(Opcode.DATA,-1, -1,-1),      //11   A  5
+        new Word(Opcode.DATA,-1, -1,-1),      //12   B 10
+        new Word(Opcode.DATA, -1,-1,-1)       //13 Result---------
     };
+
+    public static Word[] E4 = new Word[]{
+        new Word(Opcode.LDI, 8, -1,  1),      //0    Input
+        new Word(Opcode.TRAP,-1, -1,-1),      //1    Input
+        new Word(Opcode.STD, 1, -1, 11),      //2    A  
+        new Word(Opcode.LDI, 8, -1, 1 ),      //0    input
+        new Word(Opcode.TRAP,-1, -1,-1),      //1    input
+        new Word(Opcode.STD, 1, -1, 12),      //2    B   
+        new Word(Opcode.LDD, 1, -1, 11),      //3    r1 <- A
+        new Word(Opcode.LDD, 2, -1, 12),      //4    r2  <- B
+        new Word(Opcode.SUB, 1, 2, -1),      //5    r1  <- r1 - r2
+        new Word(Opcode.STD, 1, -1, 13),      //6    result
+        new Word(Opcode.LDI, 8, -1,  2),      //7   Output
+        new Word(Opcode.LDD, 9, -1, 13),      //8   r9 <- A
+        new Word(Opcode.TRAP,-1, -1,-1),      //9   Output
+        new Word(Opcode.STOP,-1, -1,-1),      //10
+        new Word(Opcode.DATA,-1, -1,-1),      //11   A  4
+        new Word(Opcode.DATA,-1, -1,-1),      //12   B 2
+        new Word(Opcode.DATA, -1,-1,-1)       //13 Result---------
+    };
+
+    /** 
+     * Recebe um int16 
+     * Se INPUT > 0 
+     *  STOP 
+     * else 
+     *  OUTPUT Entrada
+     */
+    
+    public static Word[] E5 = new Word[]{
+        
+        new Word(Opcode.LDI, 8, -1,  1),     //0 Input
+        new Word(Opcode.TRAP,-1, -1,-1),     //1 Input
+        new Word(Opcode.STD, 9, -1, 11),     //2 
+        new Word(Opcode.LDI, 3, -1,-20),     //3  
+        new Word(Opcode.STD, 3, -1, 12),     //4  
+        new Word(Opcode.LDD, 2, -1, 11),     //5  
+        new Word(Opcode.JMPIGM,-1,2,12),     //6 se for maior que 0 então Stop
+        new Word(Opcode.LDI, 8, -1,  2),     //7 Output
+        new Word(Opcode.LDD, 9, -1, 11),     //8 r2 <- A
+        new Word(Opcode.TRAP,-1, -1,-1),     //9 Output
+        new Word(Opcode.STOP,-1,-1, -1),     //10 
+        new Word(Opcode.DATA,-1,-1,-20),     //11 A
+        new Word(Opcode.DATA,-1, -1, 6)      //12 Stop
+    };
+    /** 
+     * Recebe um int16 
+     * Se INPUT = 0 
+     *  STOP 
+     * else 
+     *  OUTPUT Entrada
+     */
+    public static Word[] E6 = new Word[]{
+        
+        new Word(Opcode.LDI, 8, -1,  1),     //0 Input
+        new Word(Opcode.TRAP,-1, -1,-1),     //1 Input
+        new Word(Opcode.STD, 9, -1, 11),     //2 
+        new Word(Opcode.LDI, 3, -1,  1),     //3  
+        new Word(Opcode.STD, 3, -1, 12),     //4  
+        new Word(Opcode.LDD, 2, -1, 11),     //5  
+        new Word(Opcode.JMPIEM,-1,2,12),     //6 se for = que 0 então Stop
+        new Word(Opcode.LDI, 8, -1,  2),     //7 Output
+        new Word(Opcode.LDD, 9, -1, 11),     //8 r2 <- A
+        new Word(Opcode.TRAP,-1, -1,-1),     //9 Output
+        new Word(Opcode.STOP,-1,-1, -1),     //10 
+        new Word(Opcode.DATA,-1,-1,  1),     //11 A
+        new Word(Opcode.DATA,-1, -1, 6)      //12 Stop
+    };
+
 }
 
